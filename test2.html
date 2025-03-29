@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoverSync - Music Cover Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .hero {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #0f172a;
+            color: white;
+        }
+
+        .hero-image {
+            flex: 1;
+            background-image: url('https://example.com/musician-image.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 50px;
+            color: #10b981;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            color: #cbd5e1;
+        }
+
+        .cta-box {
+            background-color: #10b981;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .cta-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .cta-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .cta-input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 8px 0 0 8px;
+            font-size: 16px;
+        }
+
+        .cta-button {
+            padding: 15px 25px;
+            background-color: #0f172a;
+            color: white;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .cta-note {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .stats {
+            display: flex;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            margin-right: 40px;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #10b981;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #cbd5e1;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                order: 2;
+                padding: 40px 20px;
+            }
+            
+            .hero-image {
+                order: 1;
+                height: 40vh;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-text">
+            <div class="logo">CoverSync</div>
+            <h1 class="hero-title">Showcase Your Music Cover Skills & Win Prizes</h1>
+            <p class="hero-subtitle">Join thousands of musicians sharing their unique covers. Participate in weekly competitions and get recognized for your talent.</p>
+            
+            <div class="cta-box">
+                <h3 class="cta-title">Create your account today</h3>
+                <form class="cta-form">
+                    <input type="email" placeholder="Enter your email" class="cta-input">
+                    <button type="submit" class="cta-button">Get Started</button>
+                </form>
+                <p class="cta-note">Free account includes 3 uploads per month</p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Active Artists</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Cover Videos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">$25K</div>
+                    <div class="stat-label">Monthly Prizes</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image"></div>
+    </div>
+</body>
+</html>

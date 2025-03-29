@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVRX - Unleash Your Sound</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        :root {
+            --primary: #6c19ff;
+            --primary-dark: #4a00e0;
+            --accent: #19eeff;
+            --dark: #0a0a10;
+            --light: #ffffff;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* Edgy Carousel styling */
+        .carousel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            filter: grayscale(20%) contrast(110%);
+            transition: opacity 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            background-size: cover;
+            background-position: center;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            animation: edgyPulse 8s infinite alternate;
+        }
+
+        /* Modern animation effects */
+        @keyframes edgyPulse {
+            0% {
+                filter: grayscale(20%) contrast(110%) hue-rotate(0deg);
+                transform: scale(1);
+            }
+            50% {
+                filter: grayscale(20%) contrast(120%) hue-rotate(5deg);
+                transform: scale(1.05);
+            }
+            100% {
+                filter: grayscale(20%) contrast(110%) hue-rotate(0deg);
+                transform: scale(1);
+            }
+        }
+
+        /* Glitch effect for active slide transitions */
+        .carousel-slide.glitch-out {
+            animation: glitchEffect 0.5s ease-out forwards;
+        }
+
+        @keyframes glitchEffect {
+            0% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                transform: translate(0);
+            }
+            20% {
+                clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+                transform: translate(-10px, 5px);
+            }
+            40% {
+                clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
+                transform: translate(10px, -5px);
+            }
+            60% {
+                clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+                transform: translate(-5px);
+            }
+            80% {
+                clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 90%);
+                transform: translate(5px);
+            }
+            100% {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                transform: translate(0);
+                opacity: 0;
+            }
+        }
+
+        /* Glassmorphic overlay */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10,10,16,0.65) 0%, rgba(30,30,60,0.45) 100%);
+            backdrop-filter: blur(2px);
+            z-index: 0;
+        }
+
+        /* Modern navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--light);
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 40px;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Edgy hero content */
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 90%;
+            max-width: 900px;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(108, 25, 255, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--accent);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        .hero-title {
+            font-size: 68px;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            background: linear-gradient(to right, var(--light) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            margin-bottom: 50px;
+            font-weight: 300;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        .cta-button {
+            padding: 18px 35px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .primary-button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            box-shadow: 0 5px 15px rgba(108, 25, 255, 0.4);
+        }
+
+        .primary-button:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(108, 25, 255, 0.6);
+        }
+
+        .primary-button::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: -100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .primary-button:hover::after {
+            left: 100%;
+        }
+
+        .secondary-button {
+            background-color: transparent;
+            color: white;
+            border: 1px solid var(--accent);
+            position: relative;
+            z-index: 1;
+        }
+
+        .secondary-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: var(--accent);
+            transition: all 0.3s;
+            z-index: -1;
+        }
+
+        .secondary-button:hover {
+            color: var(--dark);
+        }
+
+        .secondary-button:hover::before {
+            width: 100%;
+        }
+
+        /* Modern carousel controls */
+        .carousel-controls {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 1;
+        }
+
+        .carousel-progress {
+            position: relative;
+            width: 250px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background-color: var(--accent);
+            transition: width 0.1s linear;
+        }
+
+        .carousel-counter {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+        }
+
+        .carousel-counter span {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Edge decoration elements */
+        .edge-decor {
+            position: absolute;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        .edge-decor-1 {
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            filter: blur(40px);
+        }
+
+        .edge-decor-2 {
+            bottom: 0;
+            left: 0;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            filter: blur(35px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            nav {
+                padding: 20px;
+            }
+            
+            .nav-links li {
+                margin-left: 20px;
+            }
+            
+            .hero-title {
+                font-size: 42px;
+            }
+            
+            .hero-subtitle {
+                font-size: 16px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .carousel-progress {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <!-- Edgy decor elements -->
+        <div class="edge-decor edge-decor-1"></div>
+        <div class="edge-decor edge-decor-2"></div>
+        
+        <!-- Modern carousel -->
+        <div class="carousel">
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+            
+            <!-- Improved Image 2: Intense electric guitarist with dramatic lighting -->
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1541689592655-f5f52825a3b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+            
+            <!-- Improved Image 3: Rock guitarist performing on stage with crowd -->
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1468817814611-b7edf94b5d60?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+            
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+            <div class="carousel-slide" style="background-image: url('https://images.unsplash.com/photo-1499364615650-ec38552f4f34?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');"></div>
+        </div>
+        <div class="overlay"></div>
+        
+        <!-- Sleek navigation -->
+        <nav>
+            <div class="logo">COV<span>RX</span></div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Discover</a></li>
+                <li><a href="#">Battles</a></li>
+                <li><a href="#">Login</a></li>
+            </ul>
+        </nav>
+        
+        <!-- Edgy hero content -->
+        <div class="hero-content">
+            <div class="hero-badge">Weekly $1,000 Prize Pool</div>
+            <h1 class="hero-title">Unleash Your Sound</h1>
+            <p class="hero-subtitle">Challenge conventions. Upload your covers, battle other artists, and win crypto prizes. Your stage is ready — are you?</p>
+            <div class="cta-buttons">
+                <a href="#" class="cta-button primary-button">Start Creating</a>
+                <a href="#" class="cta-button secondary-button">Explore Battles</a>
+            </div>
+        </div>
+        
+        <!-- Modern carousel controls -->
+        <div class="carousel-controls">
+            <div class="carousel-counter">
+                <span id="current-slide">01</span>/<span id="total-slides">05</span>
+            </div>
+            <div class="carousel-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const progressBar = document.querySelector('.progress-bar');
+            const currentSlideEl = document.getElementById('current-slide');
+            const totalSlidesEl = document.getElementById('total-slides');
+            
+            let currentSlide = 0;
+            let interval;
+            const duration = 6000; // 6 seconds per slide
+            const totalSlides = slides.length;
+            
+            // Set total slides
+            totalSlidesEl.textContent = totalSlides.toString().padStart(2, '0');
+            
+            // Initialize first slide
+            slides[0].classList.add('active');
+            updateCounter();
+            
+            // Start progress bar animation
+            startProgressBar();
+            
+            function startProgressBar() {
+                // Reset progress bar
+                progressBar.style.width = '0%';
+                
+                // Animate progress bar
+                let width = 0;
+                const increment = 100 / (duration / 10); // How much to increment every 10ms
+                
+                clearInterval(interval);
+                interval = setInterval(() => {
+                    if (width >= 100) {
+                        clearInterval(interval);
+                        nextSlide();
+                    } else {
+                        width += increment;
+                        progressBar.style.width = width + '%';
+                    }
+                }, 10);
+            }
+            
+            function updateCounter() {
+                currentSlideEl.textContent = (currentSlide + 1).toString().padStart(2, '0');
+            }
+            
+            function nextSlide() {
+                // Add glitch effect to current slide
+                slides[currentSlide].classList.add('glitch-out');
+                
+                setTimeout(() => {
+                    // Remove active and glitch classes from current slide
+                    slides[currentSlide].classList.remove('active', 'glitch-out');
+                    
+                    // Update current slide index
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    
+                    // Add active class to new slide
+                    slides[currentSlide].classList.add('active');
+                    
+                    // Update counter
+                    updateCounter();
+                    
+                    // Restart progress bar
+                    startProgressBar();
+                }, 500); // Wait for glitch animation to complete
+            }
+            
+            // Make carousel controls interactive
+            document.querySelector('.carousel-progress').addEventListener('click', (e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const width = rect.width;
+                const clickPosition = x / width;
+                
+                // Calculate which slide to jump to
+                const newSlide = Math.floor(clickPosition * slides.length);
+                
+                if (newSlide !== currentSlide) {
+                    // Remove active class from current slide
+                    slides[currentSlide].classList.remove('active');
+                    
+                    // Set new slide index
+                    currentSlide = newSlide;
+                    
+                    // Add active class to new slide
+                    slides[currentSlide].classList.add('active');
+                    
+                    // Update counter
+                    updateCounter();
+                    
+                    // Restart progress bar
+                    startProgressBar();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
